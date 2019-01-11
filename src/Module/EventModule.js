@@ -26,7 +26,7 @@ EventModule(eventFolder, event) {
 
         arch.forEach((f, i) => {
 
-            let pp = require(path.resolve(eventFolder) + `\\${f}`);
+            let pp = require(path.resolve(eventFolder) + `/${f}`);
 
             console.log(`${color.BgBlue}Event${color.Reset} ${f} loaded successfully!`);
 

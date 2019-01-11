@@ -46,7 +46,7 @@ var arch3 = [];
            
                 finalFiles.forEach(f  => {
                
-                    let qq = require(path.resolve(commandFolder) + `\\${f}`);
+                    let qq = require(path.resolve(commandFolder) + `/${f}`);
                     
                     
                     arr.push({name: qq.name, desc: qq.description , cat: qq.category , usage: qq.usage});

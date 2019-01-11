@@ -1,8 +1,8 @@
 # Ginko
 
-
-
 Ginko is a simple to use discord.js bot Framework. It is ideal for people that doesn't know much about coding and want to get a nice bot running.
+
+Help Server [Here](https://discord.gg/DswD9uf "Here")
 
 Some of it feautures are:
 

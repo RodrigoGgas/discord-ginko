@@ -41,10 +41,9 @@ var arch2 = [];
             // Adding the commands to the Collection
                 finalFiles.forEach(f  => {
                
-                    let pp = require(path.resolve(commandFolder) + `\\${f}`);
+                    let pp = require(path.resolve(commandFolder) + `/${f}`);
                     
                     console.log(`${color.BgBlue}Command${color.Reset} ${f} loaded successfully!`);
-                    console.log(pp)
                     commands.set(pp.name , pp.run);
                 })
           
