@@ -1,6 +1,5 @@
 //  Node-Progress
-//  Credit to visionmedia
-//  For the code
+//  Credito: visionmedia
 
 exports = module.exports = ProgressBar;
 function ProgressBar(fmt, options) {

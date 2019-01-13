@@ -14,8 +14,8 @@ var arch2 = [];
 
         try{
         var files =  fs.readdirSync(commandFolder)
-        }catch (e)  {throw new GinkoError('Invalid command Directory') }
-            // Here i get all the commands that are inside sub folders in the commandFolder directory
+        }catch (e)  {throw new GinkoError('Ruta de comandos invalida') }
+          
             files.forEach( fil => {
 
                 if(fs.lstatSync(commandFolder + '/' + fil).isDirectory()) {
@@ -29,22 +29,22 @@ var arch2 = [];
                     })     
                 }
             })
-                // Here I get any command that is in the main Command directory
+            
                 let arch = files.filter(f => f.split(".").pop() === "js");
         
                 var finalFiles = arch.concat(arch2); 
            
-                if (finalFiles.length <= 0) throw new GinkoError('I could\'t load any command')
+                if (finalFiles.length <= 0) throw new GinkoError('No pude cargar ningun comando')
                 
             
 
-            // Adding the commands to the Collection
+           
                 finalFiles.forEach(f  => {
                
                     let pp = require(path.resolve(commandFolder) + `/${f}`);
                     
-                    console.log(`${color.BgBlue}Command${color.Reset} ${f} loaded successfully!`);
-                    commands.set(pp.name , pp.run);
+                    console.log(`${color.BgBlue}Comando${color.Reset} ${f} cargado!`);
+                    commands.set(pp.nombre , pp.run);
                 })
           
             }

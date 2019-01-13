@@ -1,6 +1,6 @@
 module.exports = {
 
 GinkoClient: require('./Structures/GinkoClient'),
-Command: require('./Structures/Command'),
-Events: require('./Structures/Event')
+Comando: require('./Structures/Comando'),
+Evento: require('./Structures/Evento')
 }

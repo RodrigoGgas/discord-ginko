@@ -1,49 +1,51 @@
 # Ginko
 
-Ginko is a simple to use discord.js bot Framework. It is ideal for people that doesn't know much about coding and want to get a nice bot running.
+Ginko es un Framework que usa discord.js para facilitar la creacion de Bots
 
-Help Server [Here](https://discord.gg/DswD9uf "Here")
+Servidor de ayuda [Aqui](https://discord.gg/DswD9uf "Aqui")
 
-Some of it feautures are:
+Algunas de sus funciones:
 
-  - Command folder with sub folders (if you want to sort by category)
-  - Event Folder
-  - Simple Structure
-  - Descriptive Errors
-  - Easy Utils
-  - No restrictions
-  - Open Source
-  - More to come...
+  - Comandos en carpetas y sub carpetas (categorias)
+  - Eventos en Carpeta
+  - Estructura simple
+  - Errores descriptivos
+  - Utilidades faciles
+  - Sin restricciones
+  - Codigo abierto
+  - En español
+  - Mas por venir ...
 
-# Quick Setup Guide
+# Inicio Rapido
 
-##### Install discord-ginko
+##### Intala discord-ginko
 
   `npm i discord-ginko`
   
-##### Create a index file with the information for your bot
+##### Crea un archivo principal para añadir las opciones
   
 ```js
 const { GinkoClient } = require('discord-ginko')
 
 const client = new GinkoClient({
-    ownerID: "owner-id", // --> Your ID probbably
-    commandFolder: "./commands", // --> Path to the commands folder (Not Optional)
-    eventFolder: "./events", // --> Path to the events folder (Optional)
-    prefix: "!" // --> The command prefix
-})
-client.login("Some-Token")
-```
-##### Creating a basic command
-For example, this could be in ./commands/utility
-```js
-const { Command } = require('discord-ginko')
+    ownerID: "owner-id", // --> Probablemente tu ID
+    carpetaComandos: "./comandos", // --> Ruta a la carpeta principal de los comandos (No opcional)
+    carpetaEventos: "./eventos", // --> Ruta a la carpeta de los eventos (opcional)
+    prefijo: "!" // --> El prefijo para los comandos
 
-module.exports = new Command ({
-    name: "ping",
-    description: "A basic command",
-    category: "Util",
-    usage: "!ping",
+})
+client.login("Algun-Token")
+```
+##### Crea un comando basico
+Por ejemplo, esto puede estar en ./comandos/utilidad
+```js
+const { Comando } = require('discord-ginko')
+
+module.exports = new Comando ({
+    nombre: "ping",
+    descripcion: "Un comando basico",
+    categoria: "Utilidad",
+    uso: "!ping",
     
     run: (client, message , args) => {
         message.channel.send("Pong!")
@@ -51,18 +53,18 @@ module.exports = new Command ({
 })
 ```
 
-##### Creating an event
-There can not be any subfolders in the event directory.
-If there is, Ginko will just ignore it.
+##### Creando un evento
+No puede haber sub carpetas en los eventos,
+si hay, Ginko las va a ignorar.
 
 ```js
-const { Events } = require('discord-ginko')
+const { Eventos } = require('discord-ginko')
 
 module.exports = new Events ({
-    event: "message", // --> The name of the event, for example guildMemberAdd
+    evento: "message", // --> El nombre del evento, otro ejemplo: guildMemberAdd
     run: message => { 
     
-    console.log('New Message ' + message)
+    console.log('Nuevo mensaje ' + message.content)
         
     }
 })
@@ -70,16 +72,16 @@ module.exports = new Events ({
 
 # Util
 
-Each command information is saved in `client.commandUtil`
+Toda la información de los comandos (uso, ctaegoria, etc) en `client.commandUtil`
 
 
 
-### Todo:
+### Para Hacer:
 
- - Add more Utility Functions
- - Premade Agruments
+ - Añadir mas Utilidad
+ - Argumentos pre echos
 
-License
+Licensia
 ----
 MIT
 

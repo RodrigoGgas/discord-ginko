@@ -4,101 +4,96 @@ const { Collection  , Client } = require('discord.js')
 
 const GinkoError = require('../Util/GinkoError')
 
-const { CommandModule} = require('../Module/CommandModule')
+const { CommandModule} = require('../Module/ModuloComando')
 
-const { EventModule } = require('../Module/EventModule')
+const { EventModule } = require('../Module/ModuloEvento')
 
-const { Loader } = require('../Module/LoaderModule')
+const { Loader } = require('../Module/ModuloCarga')
 
 const { CommandInfo } = require('../Util/CommandInfo')
 
-// instance of the command and event
-const Commands = new Collection();
+// Datos para los comandos,eventos y utilidad
+const Comandos = new Collection();
 
-const Events = new Array;
+const Eventos = new Array;
 
 const CommandWatch = new Array;
 
 
 class GinkoClient extends Client {
 
-    constructor(options = {}, clientOptions) {
-        super(clientOptions || options)
+    constructor(opciones = {}, clientOptions) {
+        super(clientOptions || opciones)
         /**
-         * The Discord ID of the user.
+         * La id del dueño
          * @type {string}
         */
-        this.ownerID = options.ownerID;
+        this.ownerID = opciones.ownerID;
         /**
-         * The path to the Commands Direcotry 
+         * La ruta para la carpeta de comandos
          * @type {string}
         */
-        this.commandFolder = options.commandFolder;
+        this.carpetaComandos = opciones.carpetaComandos;
         /**
-         * The path to the Commands Direcotry 
+         * lA ruta para la carpeta de eventos
          * @type {string}
         */
-       this.eventFolder = options.eventFolder;
+       this.carpetaEventos = opciones.carpetaEventos;
         /**
-         * The prefix used to run the commands
+         * El prefijo
          * @type {string}
         */
-        this.prefix = options.prefix;
+        this.prefijo = opciones.prefijo;
     }
-    // The login Function, the one that also handles Everything basically (because im lazy)
+    // La funcion login, practicamente maneja todo
     login(token){
 
-        if(!this.prefix) throw new GinkoError("You have to set the prefix in the client options.")
+        if(!this.prefijo) throw new GinkoError("Tienes que poner un prefijo en las opciones.")
 
-           var Loading = Loader(this.commandFolder)
+           var Loading = Loader(this.carpetaComandos)
 
            
-        
-    // Once the bot is logged in, lets get the commands and events working 
+      
+    // Una vez que entro, en marcha todas la funciones
         super.login(token).then( async () => {
 
-            await CommandInfo(this.commandFolder, CommandWatch) 
+            await CommandInfo(this.carpetaComandos, CommandWatch) 
 
             this.commandUtil = CommandWatch;
 
-
-            console.log('\nLoading Events\n')
-            if(Loading.complete) EventModule(this.eventFolder, Events)
+           
+            console.log('\nCargabdo Eventos\n')
+            if(Loading.complete) EventModule(this.carpetaEventos, Eventos)
     
+            console.log(Eventos)
+            console.log('\nCargando Comandos\n')
 
-            console.log('\nLoading Commands\n')
-
-            if(Loading.complete) CommandModule(this.commandFolder , Commands)
+            if(Loading.complete) CommandModule(this.carpetaComandos , Comandos)
 
             console.log('\nBot online!\n')
            
-        
-             // The message event wich will handle the commands   
+     
             this.on('message', async message => { 
 
                 if(message.author.bot) return;
                 
-                if (message.content.indexOf(this.prefix) !== 0) return;
-                
-                let prefix = this.prefix;
+                if (message.content.indexOf(this.prefijo) !== 0) return;
+
+                let prefix = this.prefijo;
                 let messageArray = message.content.split(" ");
                 let cmd = messageArray[0]
                 let args = message.content.slice(prefix.length).trim().split(/ +/g);
-                let cmdarchivo = Commands.get(cmd.slice(prefix.length));
+                let cmdarchivo = Comandos.get(cmd.slice(prefix.length));
                 if (cmdarchivo) cmdarchivo(this, message, args);
-
                 });
+                Eventos.forEach( event => {
 
-                Events.forEach( event => {
-
-                    this.on(event.event, event.run)
+                    this.on(event.evento, event.run)
     
                 })
-
         }).catch(e => {
             throw new GinkoError(e)
         })
-
     }
 }
 module.exports = GinkoClient;

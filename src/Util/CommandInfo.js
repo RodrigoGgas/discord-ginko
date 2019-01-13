@@ -7,9 +7,6 @@ const color = require('../Util/Colors')
 const GinkoError = require('./GinkoError')
 
 
-// This will get every command and add the information about them into an Array for later utility.
-// It is basically a copy of the CommandModule file, but instead of getting the name and the function, we will get the
-// utility of it.
 
 module.exports = { 
 
@@ -49,7 +46,7 @@ var arch3 = [];
                     let qq = require(path.resolve(commandFolder) + `/${f}`);
                     
                     
-                    arr.push({name: qq.name, desc: qq.description , cat: qq.category , usage: qq.usage});
+                    arr.push({nombre: qq.nombre, desc: qq.descripcion , cat: qq.categoria , uso: qq.uso});
                 })
                 console.log('\nAssets Loaded with [0] errors\n');
             }

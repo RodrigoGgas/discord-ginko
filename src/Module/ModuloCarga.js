@@ -1,6 +1,6 @@
 const fs  = require ('fs')
 
-const LoadCommand = require('../Util/LoadCommand')
+const LoadCommand = require('../Util/CargarComando')
 
 module.exports = {
 
@@ -9,7 +9,7 @@ Loader(commandFolder) {
 
         var len = parseInt(Loading.length * 2, 10);
 
-        var Loader = new LoadCommand('Loading Assets [:bar] :percent :etas', { total: len });
+        var Loader = new LoadCommand('Cargando Utilidades [:bar] :percent :etas', { total: len });
     
         var timer = setInterval(function () {
           Loader.tick();
