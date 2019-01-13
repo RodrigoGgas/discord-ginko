@@ -18,7 +18,7 @@ var arch3 = [];
         var files =  fs.readdirSync(commandFolder)
         }catch (e)  {
 
-            throw new GinkoError("Invalid command Directory")
+            throw new GinkoError("Ruta a los comandos invalida")
 
         } 
            
@@ -39,7 +39,7 @@ var arch3 = [];
         
                 var finalFiles = arch.concat(arch3); 
            
-                if (finalFiles.length <= 0) throw new GinkoError('I could\'t load any command')
+                if (finalFiles.length <= 0) throw new GinkoError('No pude cargar ningun comando')
            
                 finalFiles.forEach(f  => {
                
